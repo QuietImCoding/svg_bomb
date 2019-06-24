@@ -1,0 +1,31 @@
+#!/bin/bash
+
+read -p "How dEeP?? "
+
+cat <<EOF
+<?xml version="1.0" ?>
+<svg xmlns="http://www.w3.org/2000/svg"
+     xmlns:xlink="http://www.w3.org/1999/xlink"
+     width="600" height="400">
+  <defs>
+    <path id="lev0" fill="#039" d="M0,0 100,0 50 86.6 z" />
+
+EOF
+
+
+for i in $(seq 1 $REPLY); do
+    cat <<EOF
+    <g id="lev$i">
+      <use xlink:href="#lev$((i - 1))" transform="matrix(0.5 0 0 0.5  0  0)" />
+      <use xlink:href="#lev$((i - 1))" transform="matrix(0.5 0 0 0.5 50  0)" />
+      <use xlink:href="#lev$((i - 1))" transform="matrix(0.5 0 0 0.5 25 43.3)" />
+    </g>
+EOF
+done
+
+cat <<EOF
+  </defs>
+  <use xlink:href="#lev$i" transform="scale(4)"/>
+</svg>
+EOF
+	 
